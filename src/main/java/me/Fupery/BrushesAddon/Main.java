@@ -19,8 +19,8 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        if (getArtMapVersion().isLessThan(2, 4, 9)) {
-            disablePlugin("Invalid ArtMap version! 2.4.9 or higher is required. This add-on will be disabled.");
+        if (getArtMapVersion().isLessThan(2, 5)) {
+            disablePlugin("Invalid ArtMap version! 2.5 or higher is required. This add-on will be disabled.");
             return;
         }
         if (Version.getBukkitVersion().isLessThan(1, 9)) {
