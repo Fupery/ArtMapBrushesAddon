@@ -2,6 +2,7 @@ package me.Fupery.BrushesAddon;
 
 import me.Fupery.ArtMap.Colour.ArtDye;
 import me.Fupery.ArtMap.Colour.Palette;
+import me.Fupery.ArtMap.Utils.Version;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
@@ -40,6 +41,8 @@ public class CustomPalette implements Palette {
             SILVER, GRAY, PINK, LIME, YELLOW, LIGHT_BLUE, MAGENTA, ORANGE, WHITE,
             CREAM, COFFEE, GRAPHITE, GUNPOWDER, MAROON, AQUA, GRASS, GOLD, VOID};
 
+    private boolean versionBelow1_11 = Version.getBukkitVersion().isLessThan(1, 11);
+
     @Override
     public ArtDye getDye(ItemStack item) {
         if (item.getType() == Material.DIAMOND_HOE && item.hasItemMeta()
@@ -74,7 +77,11 @@ public class CustomPalette implements Palette {
             ItemStack item = super.toItem();
             ItemMeta meta = item.getItemMeta();
             meta.setDisplayName(name() + " Brush");
-            meta.spigot().setUnbreakable(true);
+            if (versionBelow1_11) {
+                meta.spigot().setUnbreakable(true);
+            } else {
+                meta.setUnbreakable(true);
+            }
             meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
             item.setItemMeta(meta);
             return item;
