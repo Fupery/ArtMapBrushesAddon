@@ -27,6 +27,10 @@ public class Main extends JavaPlugin {
             disablePlugin("Invalid minecraft version! This add-on does not work with minecraft 1.8 or below.");
             return;
         }
+        if (!ArtMap.getConfiguration().FORCE_ART_KIT) {
+            disablePlugin("Invalid Configuration! You must set 'forceArtKit' to 'true' in your ArtMap config.yml.");
+            return;
+        }
         try {
             config = Config.loadConfigurations(this);
         } catch (Config.InvalidResourcePackURLException e) {
